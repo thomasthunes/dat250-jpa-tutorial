@@ -13,7 +13,7 @@ public class Bank {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "bank")
+    @OneToMany(mappedBy = "owningBank")
     private Collection<CreditCard> ownedCards;
 
     public Bank(){

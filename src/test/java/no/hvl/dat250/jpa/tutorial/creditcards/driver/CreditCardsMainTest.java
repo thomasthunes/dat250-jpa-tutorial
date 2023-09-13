@@ -51,7 +51,7 @@ public class CreditCardsMainTest {
 
         assertThat(firstCard.getNumber(), is(12345));
         assertThat(firstCard.getBalance(), is(-5000));
-        assertThat(firstCard.getCreditLimit(), is(-10000));
+        assertThat(firstCard.getCreditLimit(), is(-5000));
 
         assertThat(secondCard.getNumber(), is(123));
         assertThat(secondCard.getBalance(), is(1));

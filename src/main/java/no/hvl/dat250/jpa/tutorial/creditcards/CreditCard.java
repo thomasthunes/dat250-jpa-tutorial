@@ -1,8 +1,11 @@
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class CreditCard {
 
@@ -13,21 +16,24 @@ public class CreditCard {
     private Integer balance;
     private Integer creditLimit;
 
-    @OneToOne(mappedBy = "CreditCard")
+    @ManyToOne
+    @JoinColumn(name = "pincode_id")
     private Pincode pincode;
 
     @ManyToOne
     @JoinColumn(name = "bank_id")
-    private Bank bank;
+    private Bank owningBank;
 
     public CreditCard(){
         // default
     }
 
-    public CreditCard(Integer number, Integer balance, Integer creditLimit){
+    public CreditCard(Integer number, Integer balance, Integer creditLimit){ //, Pincode pincode, Bank owningBank){
         this.number = number;
         this.balance = balance;
         this.creditLimit = creditLimit;
+        //this.pincode = pincode;
+        //this.owningBank = owningBank;
     }
 
     public Integer getNumber() {
@@ -68,10 +74,10 @@ public class CreditCard {
 
     public Bank getOwningBank() {
         // TODO: implement method!
-        return this.bank;
+        return this.owningBank;
     }
 
     public void setOwningBank(Bank bank){
-        this.bank = bank;
+        this.owningBank = bank;
     }
 }

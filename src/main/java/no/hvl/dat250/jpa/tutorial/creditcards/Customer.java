@@ -18,7 +18,12 @@ public class Customer {
     )
     private Collection<Address> addresses;
 
-    @OneToMany(mappedBy = "owners")
+    @ManyToMany
+    @JoinTable(
+            name = "customer_address",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
     private Collection<CreditCard> creditCards;
 
     public Customer(){
