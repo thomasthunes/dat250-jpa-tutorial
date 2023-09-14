@@ -1,57 +1,33 @@
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Getter
     private String street;
+    @Getter
     private Integer number;
 
+    public Collection<Customer> getOwners(){
+        return new HashSet<>(customers);
+    }
+
+    @Getter
     @ManyToMany(mappedBy = "addresses")
-    private Collection<Customer> owners;
+    private Collection<Customer> customers;
 
-    public Address(){
-        // Default constructor
-    }
-
-    public Address(String street, Integer number) {
-        this.street = street;
-        this.number = number;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public String getStreet() {
-        // TODO: implement method!
-        return this.street;
-    }
-
-    public void setStreet(String street){
-        this.street = street;
-    }
-
-    public Integer getNumber() {
-        // TODO: implement method!
-        return this.number;
-    }
-
-    public void setNumber(Integer number){
-        this.number = number;
-    }
-
-    public Collection<Customer> getOwners() {
-        // TODO: implement method!
-        return owners;
-    }
-
-    public void setOwners(Collection<Customer> owners){
-        this.owners = owners;
-    }
 }
